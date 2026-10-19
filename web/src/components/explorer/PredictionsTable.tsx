@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import type { ExplorerCopy } from '../../content/explorador';
 import type { ModelData, PredictParcel } from '../../data/types';
 import { formatNumber, placeName } from '../../lib/format';
-import { predictionsCsv } from '../../model/csv';
+import { downloadPredictionsCsv } from '../../lib/download';
 
 type Key = 'id' | 'municipality' | 'state' | 'prediction' | 'interval' | 'flag';
 type Dir = 'ascending' | 'descending';
@@ -47,17 +47,7 @@ export function PredictionsTable({ model, parcels, selectedId, onSelect, copy, d
     </th>
   );
 
-  const download = () => {
-    const blob = new Blob([predictionsCsv(model)], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'predicciones_59_agrocebada.csv';
-    document.body.append(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 0);
-  };
+  const download = () => downloadPredictionsCsv(model);
 
   return (
     <div className="predictions">

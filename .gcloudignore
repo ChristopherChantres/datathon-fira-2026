@@ -6,6 +6,7 @@
 .DS_Store
 **/.DS_Store
 model/
+docs/
 web/node_modules/
 web/dist/
 web/public/data/

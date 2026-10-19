@@ -1,5 +1,5 @@
-// Section ids, navigation labels and titles (visitor-facing: Spanish). Sections that are
-// not built yet carry a one-sentence placeholder. Counts come from the data, never literals.
+// Section ids, navigation labels and titles (visitor-facing: Spanish). Counts come from
+// the data, never literals.
 import type { ModelData } from '../data/types';
 import { isPredict } from '../data/types';
 
@@ -10,6 +10,7 @@ export type SectionId =
   | 'modelo'
   | 'explorador'
   | 'desempeno'
+  | 'preguntas'
   | 'impacto'
   | 'equipo';
 
@@ -17,8 +18,6 @@ export interface SectionCopy {
   id: SectionId;
   nav: string;
   title: string;
-  /** Only for sections still to be built. */
-  placeholder?: string;
 }
 
 export function sectionCopy(model: ModelData): SectionCopy[] {
@@ -56,16 +55,19 @@ export function sectionCopy(model: ModelData): SectionCopy[] {
       title: '¿Qué tan bien funciona?',
     },
     {
+      id: 'preguntas',
+      nav: 'Preguntas guía',
+      title: 'Preguntas guía',
+    },
+    {
       id: 'impacto',
       nav: 'Impacto',
       title: 'Por qué importa',
-      placeholder: 'Aquí explicaremos cómo un intervalo de rendimiento por parcela ayuda a evaluar crédito y seguro agrícola con datos públicos.',
     },
     {
       id: 'equipo',
       nav: 'Equipo',
       title: 'Equipo',
-      placeholder: 'Aquí presentaremos al equipo detrás de este trabajo.',
     },
   ];
 }

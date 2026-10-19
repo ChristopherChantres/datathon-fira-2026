@@ -4,6 +4,7 @@ import type { PredictParcel } from '../data/types';
 import { formatDelta, formatNumber, formatYield, placeName } from '../lib/format';
 import type { Explanation } from '../model/explain';
 import type { WhatIfResult } from '../model/whatIf';
+import { facts } from './facts';
 import { tone } from './modelo';
 
 export function explorerCopy(story: Story) {
@@ -33,8 +34,7 @@ export function explorerCopy(story: Story) {
           ? `En este municipio los rendimientos reportados vienen redondeados; por eso el intervalo usa ±${half} t/ha.`
           : `En este municipio los rendimientos reportados son medidos (sin redondear); el intervalo usa ±${half} t/ha.`;
       },
-      attention:
-        'Atención: a menos de 500 m está una de las 10 parcelas que el modelo predijo peor en validación; tómalo con más cautela.',
+      attention: `Atención: a menos de ${facts.attentionRadiusM} m está una de las ${facts.attentionWorstN} parcelas que el modelo predijo peor en validación; tómalo con más cautela.`,
     },
     breakdown: {
       title: '¿De dónde sale?',
@@ -46,7 +46,7 @@ export function explorerCopy(story: Story) {
       neighbors: `Cada línea es una vecina conocida; más gruesa, más peso. Pasa el cursor o usa las flechas para ver cada una.`,
       neighborTip: (id: string, distance: string, yieldValue: number, share: string) => [id, `a ${distance}`, `Rendimiento real: ${formatYield(yieldValue)}`, `Peso: ${share}`],
       modelA: 'Modelo A: el satélite corrige',
-      modelB: 'Modelo B: segunda opinión (top 5 + otras)',
+      modelB: (top: number) => `Modelo B: segunda opinión (top ${top} + otras)`,
       ensemble: 'La combinación',
       ensembleTex: (e: Explanation) =>
         String.raw`${tone('prediction', String.raw`\hat y`)} = ${e.ensemble.weightA} \times ${tone('phenology', formatNumber(e.ensemble.modelA))} + ${e.ensemble.weightB} \times ${tone('location', formatNumber(e.ensemble.modelB))} = ${tone('prediction', formatNumber(e.ensemble.prediction))}`,

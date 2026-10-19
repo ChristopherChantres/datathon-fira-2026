@@ -55,7 +55,8 @@
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgb(0 0 0 / 0.82);
-  opacity: 0.35;
+  /* Dimmed, not hidden: inactive steps must stay readable (white at 55 % ≈ 6:1 on black). */
+  opacity: 0.55;
   transition: opacity 0.4s var(--ease);
 }
 .scrolly__step.is-active .scrolly__card {

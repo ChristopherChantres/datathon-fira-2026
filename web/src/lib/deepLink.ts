@@ -22,3 +22,9 @@ export function parcelFromHash(hash: string, model: ModelData, fallbackId: strin
 export function explorerHash(id: string): string {
   return `#${EXPLORER_SECTION}?${PARAM}=${encodeURIComponent(id)}`;
 }
+
+/** Selects a parcel in the explorer (via the hash) and brings the explorer into view. */
+export function openInExplorer(id: string, smooth: boolean) {
+  window.location.hash = explorerHash(id);
+  document.getElementById(EXPLORER_SECTION)?.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+}

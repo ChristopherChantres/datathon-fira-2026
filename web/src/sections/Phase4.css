@@ -1,0 +1,181 @@
+/* Impacto, Preguntas guía, Equipo and the footer. */
+.section__lead-muted {
+  color: var(--ink-muted);
+  font-size: var(--step-1);
+}
+
+.cards {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-4) 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: var(--space-3);
+}
+.card {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  min-width: 0;
+}
+.card h3 {
+  font-size: var(--step-1);
+  margin-bottom: var(--space-2);
+}
+.card p {
+  font-size: var(--step--1);
+  margin-bottom: var(--space-2);
+}
+.card p:last-child {
+  margin-bottom: 0;
+}
+.cards--questions {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+}
+.card__number {
+  font-size: var(--step-2) !important;
+  font-weight: 700;
+  color: var(--ink-muted);
+  line-height: 1;
+}
+
+/* Forest plot */
+.forest {
+  margin: var(--space-5) 0 0;
+}
+.forest__box {
+  position: relative;
+  max-width: 46rem;
+}
+.forest svg {
+  display: block;
+  font-size: 11px;
+  cursor: pointer;
+}
+.forest__grid line {
+  stroke: var(--line);
+}
+.forest__grid text,
+.forest__axis {
+  fill: var(--ink-muted);
+}
+.forest__hit {
+  fill: transparent;
+}
+.forest__bar {
+  stroke: var(--prediction);
+  stroke-opacity: 0.45;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.forest__dot {
+  fill: var(--prediction);
+}
+.forest__row.is-flagged .forest__bar {
+  stroke: var(--error);
+  stroke-opacity: 0.8;
+}
+.forest__row.is-flagged .forest__dot {
+  fill: var(--error);
+}
+.forest__row.is-active .forest__hit {
+  fill: rgb(255 255 255 / 0.08);
+}
+.forest__row.is-active .forest__bar {
+  stroke-opacity: 1;
+}
+.forest__tip {
+  position: absolute;
+  transform: translate(12px, -50%);
+  padding: var(--space-1) var(--space-2);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.forest__tip.is-left {
+  transform: translate(calc(-100% - 12px), -50%);
+}
+.forest figcaption {
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+  margin-top: var(--space-2);
+}
+.forest figcaption p {
+  margin-bottom: var(--space-1);
+}
+.impact__honesty {
+  margin-top: var(--space-4);
+  font-weight: 600;
+}
+
+/* Team */
+.team__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: start;
+}
+.team__name {
+  font-size: var(--step-2);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  margin-bottom: var(--space-1);
+}
+.team h3 {
+  font-size: var(--step-1);
+  margin-top: var(--space-4);
+}
+.team .card h3 {
+  margin-top: 0;
+}
+.team__members,
+.team__sources {
+  padding-left: 1.1em;
+}
+.team__sources {
+  font-size: var(--step--1);
+}
+.team__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+.team__ai {
+  margin-top: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--ink-muted);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+.team__ai h3 {
+  font-size: var(--step-0);
+  color: var(--ink);
+  margin: 0 0 var(--space-2);
+}
+
+/* Footer */
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-2);
+}
+.footer__links button {
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  color: inherit;
+  font-size: inherit;
+}
+
+@media (max-width: 767px) {
+  .team__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+}

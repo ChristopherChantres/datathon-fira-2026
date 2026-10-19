@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ---- Build: tests + static bundle of web/ ----
-FROM node:20-alpine AS build
+FROM node:22-alpine AS build
 WORKDIR /app
 
 # The site reads the generated model data from ../data (see web/scripts/sync-data.mjs).

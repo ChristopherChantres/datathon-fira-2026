@@ -4,13 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark" />
+    <!-- Same value as --bg in src/styles/tokens.css -->
     <meta name="theme-color" content="#000000" />
+    <title>¿Cuánta cebada dará esta parcela? · AgroCebada FIRA 2026</title>
     <meta
       name="description"
-      content="Cómo predecimos el rendimiento de cebada de temporal con datos satelitales y de ubicación · Reto AgroCebada FIRA 2026."
+      content="Cómo estimamos el rendimiento de cebada de temporal en Hidalgo, Puebla y Tlaxcala con datos de satélite y ubicación, y un explorador para correr el modelo en cada parcela."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:title" content="¿Cuánta cebada dará esta parcela? · AgroCebada FIRA 2026" />
+    <meta
+      property="og:description"
+      content="Un modelo de rendimiento de cebada explicado paso a paso, con un explorador interactivo de las parcelas del reto."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="¿Cuánta cebada dará esta parcela? · AgroCebada FIRA 2026" />
+    <meta
+      name="twitter:description"
+      content="Un modelo de rendimiento de cebada explicado paso a paso, con un explorador interactivo de las parcelas del reto."
     />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <title>AgroCebada · FIRA 2026</title>
+    <!-- Needed before anything renders: fetch them in parallel with the JS. -->
+    <link rel="preload" href="/data/model.json" as="fetch" type="application/json" crossorigin />
+    <link rel="preload" href="/data/parcels.geojson" as="fetch" type="application/geo+json" crossorigin />
   </head>
   <body>
     <div id="root"></div>

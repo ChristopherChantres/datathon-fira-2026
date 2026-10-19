@@ -115,7 +115,7 @@ export function modeloCopy(story: Story, e: Explanation) {
       title: 'La receta completa',
       body: [
         `Esa es la fórmula entera, la misma para las ${counts.predict} parcelas por predecir.`,
-        'Pronto podrás probarla tú con cualquiera de ellas.',
+        'Más abajo, en el explorador, puedes probarla con cualquiera de ellas.',
       ],
     },
   ];

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Formula } from '../components/Formula';
 import { MiniWaterfall } from '../components/explorer/MiniWaterfall';
 import { NeighborView } from '../components/explorer/NeighborView';
@@ -29,9 +29,20 @@ export function ExplorerSection({ section, story, collection }: { section: Secti
   );
   const topRef = useRef<HTMLDivElement>(null);
 
+  // Other sections (the forest plot) select a parcel by changing the hash.
+  useEffect(() => {
+    const onHash = () => {
+      if (!window.location.hash.includes('parcela=')) return;
+      setSelectedId(parcelFromHash(window.location.hash, model, story.featured.id));
+    };
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, [model, story.featured.id]);
+
   const parcel = parcels.find((p) => p.id === selectedId) ?? story.featured;
   const e = useMemo(() => explain(model, parcel), [model, parcel]);
   const labels = useMemo(() => modeloCopy({ ...story, featured: parcel }, e), [story, parcel, e]);
+  const topB = e.waterfallB.filter((s) => s.kind === 'delta' && s.key !== 'others').length;
 
   const select = useCallback((id: string, reveal = false) => {
     setSelectedId(id);
@@ -91,12 +102,12 @@ export function ExplorerSection({ section, story, collection }: { section: Secti
                 caption={copy.breakdown.modelA}
               />
               <p className="breakdown__note">{copy.breakdown.zoomed}</p>
-              <h4 className="tone-location">{copy.breakdown.modelB}</h4>
+              <h4 className="tone-location">{copy.breakdown.modelB(topB)}</h4>
               <MiniWaterfall
                 steps={e.waterfallB}
                 label={labels.stepLabelB}
                 tones={{ start: 'muted', delta: 'location', minor: 'muted', total: 'location' }}
-                caption={copy.breakdown.modelB}
+                caption={copy.breakdown.modelB(topB)}
               />
               <p className="breakdown__note">{copy.breakdown.zoomed}</p>
               <h4 className="tone-prediction">{copy.breakdown.ensemble}</h4>

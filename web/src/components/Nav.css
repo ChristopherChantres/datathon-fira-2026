@@ -46,9 +46,14 @@
 .nav__links a:focus-visible {
   color: var(--ink);
 }
-@media (min-width: 60rem) {
+.nav__links a[aria-current] {
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--prediction);
+}
+@media (min-width: 72rem) {
   .nav__links {
     justify-content: flex-end;
+    gap: var(--space-3);
     mask-image: none;
   }
 }

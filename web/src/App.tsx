@@ -2,14 +2,20 @@ import { lazy, Suspense, useEffect, useMemo, type ReactNode } from 'react';
 import { Hero } from './components/Hero';
 import { Nav } from './components/Nav';
 import { FEATURED_PARCEL_ID } from './content/featured';
-import { sectionCopy, type SectionCopy, type SectionId } from './content/sections';
+import { sectionCopy, type SectionId } from './content/sections';
 import { useModel, useParcels, type ModelData, type ParcelCollection } from './data';
 import { buildStory } from './data/story';
 import { sectionFromHash } from './lib/deepLink';
 import { FenologiaSection } from './sections/FenologiaSection';
 import { ExplorerSection } from './sections/ExplorerSection';
 import { ModeloSection } from './sections/ModeloSection';
+import { ImpactSection } from './sections/ImpactSection';
 import { PerformanceSection } from './sections/PerformanceSection';
+import { QuestionsSection } from './sections/QuestionsSection';
+import { TeamSection } from './sections/TeamSection';
+import { equipoCopy } from './content/equipo';
+import { site } from './content/site';
+import { downloadPredictionsCsv } from './lib/download';
 import { ProblemaSection } from './sections/ProblemaSection';
 import './App.css';
 
@@ -64,13 +70,11 @@ function Page({ model, collection }: { model: ModelData; collection: ParcelColle
         {story_.modelo}
         <ExplorerSection section={section('explorador')} story={story} collection={collection} />
         <PerformanceSection section={section('desempeno')} story={story} />
-        {sections
-          .filter((s) => s.placeholder)
-          .map((s) => (
-            <Placeholder key={s.id} section={s} />
-          ))}
+        <QuestionsSection section={section('preguntas')} story={story} />
+        <ImpactSection section={section('impacto')} story={story} />
+        <TeamSection section={section('equipo')} />
       </main>
-      <footer className="footer muted">Reto AgroCebada FIRA 2026</footer>
+      <Footer model={model} />
       {DebugPanel && (
         <Suspense fallback={null}>
           <DebugPanel model={model} />
@@ -81,14 +85,22 @@ function Page({ model, collection }: { model: ModelData; collection: ParcelColle
 }
 
 
-function Placeholder({ section }: { section: SectionCopy }) {
+function Footer({ model }: { model: ModelData }) {
+  const copy = equipoCopy().footer;
   return (
-    <section id={section.id} className="section" aria-labelledby={`${section.id}-title`}>
-      <div className="section__inner">
-        <h2 id={`${section.id}-title`}>{section.title}</h2>
-        {section.placeholder && <p className="muted">{section.placeholder}</p>}
-      </div>
-    </section>
+    <footer className="footer muted">
+      <p>{copy.credit}</p>
+      <p className="footer__links">
+        {copy.repo && (
+          <a href={site.repoUrl} target="_blank" rel="noopener noreferrer">
+            {copy.repo} ↗
+          </a>
+        )}
+        <button type="button" onClick={() => downloadPredictionsCsv(model)}>
+          {copy.csv}
+        </button>
+      </p>
+    </footer>
   );
 }
 
