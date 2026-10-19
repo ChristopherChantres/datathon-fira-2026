@@ -1,9 +1,16 @@
-import { lazy, Suspense, useEffect, type ReactNode } from 'react';
-import { Formula } from './components/Formula';
-import { ParcelMap } from './components/ParcelMap';
+import { lazy, Suspense, useEffect, useMemo, type ReactNode } from 'react';
+import { Hero } from './components/Hero';
 import { Nav } from './components/Nav';
+import { FEATURED_PARCEL_ID } from './content/featured';
 import { sectionCopy, type SectionCopy, type SectionId } from './content/sections';
 import { useModel, useParcels, type ModelData, type ParcelCollection } from './data';
+import { buildStory } from './data/story';
+import { sectionFromHash } from './lib/deepLink';
+import { FenologiaSection } from './sections/FenologiaSection';
+import { ExplorerSection } from './sections/ExplorerSection';
+import { ModeloSection } from './sections/ModeloSection';
+import { PerformanceSection } from './sections/PerformanceSection';
+import { ProblemaSection } from './sections/ProblemaSection';
 import './App.css';
 
 // Statically false in production builds, so the panel is tree-shaken away.
@@ -17,7 +24,7 @@ export function App() {
     const error = model.status === 'error' ? model.error : parcels.status === 'error' ? parcels.error : null;
     return <ErrorState error={error} />;
   }
-  if (model.status === 'loading' || parcels.status === 'loading') {
+  if (model.status !== 'ready' || parcels.status !== 'ready') {
     return <LoadingState />;
   }
   return <Page model={model.data} collection={parcels.data} />;
@@ -25,16 +32,23 @@ export function App() {
 
 function Page({ model, collection }: { model: ModelData; collection: ParcelCollection }) {
   const sections = sectionCopy(model);
+  // Strict in development: a bad FEATURED_PARCEL_ID throws instead of silently falling back.
+  const story = useMemo(() => buildStory(model, FEATURED_PARCEL_ID, import.meta.env.DEV), [model]);
 
   // Sections render only after the data loads, so the browser's own jump to a deep link
   // (e.g. /#explorador) found nothing; redo it once the page exists.
   useEffect(() => {
-    const id = decodeURIComponent(window.location.hash.slice(1));
+    // "#explorador?parcela=AGC_003" points at the explorer section.
+    const id = sectionFromHash(window.location.hash);
     if (id) document.getElementById(id)?.scrollIntoView({ behavior: 'instant' });
   }, []);
-  const extras: Partial<Record<SectionId, ReactNode>> = {
-    problema: <ParcelMap model={model} collection={collection} />,
-    modelo: <EnsembleFormula model={model} />,
+
+  const byId = new Map(sections.map((s) => [s.id, s]));
+  const section = (id: SectionId) => byId.get(id)!;
+  const story_: Record<'problema' | 'fenologia' | 'modelo', ReactNode> = {
+    problema: <ProblemaSection section={section('problema')} story={story} collection={collection} />,
+    fenologia: <FenologiaSection section={section('fenologia')} story={story} />,
+    modelo: <ModeloSection section={section('modelo')} story={story} collection={collection} />,
   };
 
   return (
@@ -44,11 +58,17 @@ function Page({ model, collection }: { model: ModelData; collection: ParcelColle
       </a>
       <Nav sections={sections} />
       <main id="contenido">
-        {sections.map((section) => (
-          <Section key={section.id} section={section}>
-            {extras[section.id]}
-          </Section>
-        ))}
+        <Hero story={story} collection={collection} />
+        {story_.problema}
+        {story_.fenologia}
+        {story_.modelo}
+        <ExplorerSection section={section('explorador')} story={story} collection={collection} />
+        <PerformanceSection section={section('desempeno')} story={story} />
+        {sections
+          .filter((s) => s.placeholder)
+          .map((s) => (
+            <Placeholder key={s.id} section={s} />
+          ))}
       </main>
       <footer className="footer muted">Reto AgroCebada FIRA 2026</footer>
       {DebugPanel && (
@@ -60,36 +80,15 @@ function Page({ model, collection }: { model: ModelData; collection: ParcelColle
   );
 }
 
-function Section({ section, children }: { section: SectionCopy; children?: ReactNode }) {
-  const isHero = section.id === 'hero';
-  const Heading = isHero ? 'h1' : 'h2';
+
+function Placeholder({ section }: { section: SectionCopy }) {
   return (
-    <section id={section.id} className={`section${isHero ? ' section--hero' : ''}`} aria-labelledby={`${section.id}-title`}>
+    <section id={section.id} className="section" aria-labelledby={`${section.id}-title`}>
       <div className="section__inner">
-        <Heading id={`${section.id}-title`}>{section.title}</Heading>
-        <p className={isHero ? 'section__lead' : 'muted'}>{section.placeholder}</p>
-        {children}
+        <h2 id={`${section.id}-title`}>{section.title}</h2>
+        {section.placeholder && <p className="muted">{section.placeholder}</p>}
       </div>
     </section>
-  );
-}
-
-/** Smoke test for KaTeX: the final ensemble, with the weights and clip range from model.json. */
-function EnsembleFormula({ model }: { model: ModelData }) {
-  const { weightA, weightB, clip } = model.ensemble;
-  const [lo, hi] = clip;
-  const tex =
-    String.raw`\htmlClass{tex-prediction}{\hat{y}} = \min\!\Big(\max\big(` +
-    String.raw`${weightA}\,\htmlClass{tex-phenology}{A} + ${weightB}\,\htmlClass{tex-location}{B},\; ${lo}\big),\; ${hi}\Big)`;
-  return (
-    <div className="ensemble">
-      <Formula tex={tex} block />
-      <p className="muted ensemble__caption">
-        <span className="tex-phenology">A</span>: ubicación + corrección por fenología ·{' '}
-        <span className="tex-location">B</span>: ubicación · <span className="tex-prediction">ŷ</span>: rendimiento
-        estimado (t/ha)
-      </p>
-    </div>
   );
 }
 

@@ -7,10 +7,11 @@ export type AsyncState<T> =
   | { status: 'error'; error: Error }
   | { status: 'ready'; data: T };
 
-function useAsync<T>(load: () => Promise<T>): AsyncState<T> {
+function useAsync<T>(load: () => Promise<T>, enabled = true): AsyncState<T> {
   const [state, setState] = useState<AsyncState<T>>({ status: 'loading' });
 
   useEffect(() => {
+    if (!enabled) return;
     let active = true;
     load().then(
       (data) => active && setState({ status: 'ready', data }),
@@ -20,11 +21,12 @@ function useAsync<T>(load: () => Promise<T>): AsyncState<T> {
     return () => {
       active = false;
     };
-  }, [load]);
+  }, [load, enabled]);
 
   return state;
 }
 
 export const useModel = (): AsyncState<ModelData> => useAsync(loadModel);
-export const useCurves = (): AsyncState<CurvesData> => useAsync(loadCurves);
+/** The NDVI curves are large; pass `enabled = false` to defer the request until needed. */
+export const useCurves = (enabled = true): AsyncState<CurvesData> => useAsync(loadCurves, enabled);
 export const useParcels = (): AsyncState<ParcelCollection> => useAsync(loadParcels);

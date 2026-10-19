@@ -1,0 +1,429 @@
+.explorer__intro {
+  color: var(--ink-muted);
+}
+.explorer h3 {
+  margin-top: var(--space-5);
+}
+.explorer h4 {
+  font-size: var(--step-0);
+  margin: var(--space-3) 0 var(--space-2);
+}
+
+.explorer__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: start;
+  margin-top: var(--space-4);
+  scroll-margin-top: calc(var(--nav-height) + var(--space-3));
+}
+.explorer__select {
+  --graphic-h: 60svh;
+  min-width: 0;
+}
+.explorer-map {
+  margin-top: var(--space-3);
+}
+.explorer-map .parcel-map__parcel--train {
+  opacity: 0.3;
+}
+
+/* Combobox */
+.picker__label {
+  display: block;
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+  margin-bottom: var(--space-1);
+}
+.picker__box {
+  position: relative;
+}
+.picker input {
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+}
+.picker input::placeholder {
+  color: var(--ink-muted);
+}
+.picker__list {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  max-height: 16rem;
+  overflow-y: auto;
+  margin: 4px 0 0;
+  padding: var(--space-1) 0;
+  list-style: none;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.picker__option,
+.picker__empty {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--step--1);
+  cursor: pointer;
+}
+.picker__option.is-active {
+  background: rgb(255 255 255 / 0.1);
+}
+.picker__option.is-current {
+  color: var(--prediction);
+}
+.picker__empty {
+  color: var(--ink-muted);
+  cursor: default;
+}
+
+/* Result */
+.result {
+  min-width: 0;
+}
+.result p {
+  margin: 0;
+}
+.result__caption,
+.result__note {
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+}
+.result__value {
+  color: var(--prediction);
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.result__interval {
+  color: var(--prediction);
+}
+.result__chart {
+  margin-top: var(--space-3);
+  height: 92px;
+}
+.result__chart svg {
+  overflow: visible;
+}
+.result__known {
+  fill: var(--train);
+  fill-opacity: 0.35;
+}
+.result__band,
+.result__marker {
+  transition: transform 0.8s var(--ease);
+}
+.result__band rect {
+  fill: var(--prediction);
+  fill-opacity: 0.25;
+  transition: width 0.8s var(--ease);
+}
+.result__marker line {
+  stroke: var(--prediction);
+  stroke-width: 2;
+}
+.result__marker circle {
+  fill: var(--prediction);
+}
+.result__axis {
+  stroke: var(--ink-muted);
+}
+.result__tick {
+  fill: var(--ink-muted);
+  font-size: 12px;
+}
+.result__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin: var(--space-4) 0 var(--space-2);
+}
+.result__facts dt {
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+.result__facts dd {
+  margin: 0;
+}
+.result__regime {
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+.result__attention {
+  margin-top: var(--space-3) !important;
+  padding: var(--space-2) var(--space-3);
+  border-left: 3px solid var(--error);
+  color: var(--error);
+  font-size: var(--step--1);
+}
+
+/* What-if */
+.whatif__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: var(--space-5);
+  align-items: start;
+}
+.whatif__slider {
+  margin-bottom: var(--space-3);
+}
+.whatif__slider label {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--step--1);
+}
+.whatif__slider output {
+  font-variant-numeric: tabular-nums;
+}
+.whatif__slider input[type='range'] {
+  width: 100%;
+  accent-color: var(--ink);
+  margin: var(--space-1) 0 0;
+}
+.whatif__range {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+.whatif__result {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.whatif__result p {
+  margin-bottom: var(--space-2);
+}
+.whatif__estimate {
+  font-size: var(--step-1);
+}
+.whatif__result button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Breakdown */
+.breakdown__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-4);
+}
+.breakdown__card {
+  min-width: 0;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.breakdown__card ul {
+  padding-left: 1.1em;
+  margin: 0 0 var(--space-2);
+  font-size: var(--step--1);
+}
+.breakdown__card .formula {
+  overflow-x: auto;
+  font-size: var(--step--1);
+}
+.breakdown__note {
+  margin: var(--space-1) 0 0;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+.mini-wf {
+  width: 100%;
+  border-collapse: collapse;
+  /* The bar column only holds absolutely positioned bars, so give columns fixed widths. */
+  table-layout: fixed;
+  font-size: var(--step--1);
+}
+.mini-wf th {
+  font-weight: 400;
+  text-align: left;
+  color: var(--ink);
+  padding: 2px var(--space-2) 2px 0;
+  width: 44%;
+}
+.mini-wf__track {
+  position: relative;
+  height: 1.4em;
+  width: 38%;
+  background: linear-gradient(var(--line), var(--line)) 0 50% / 100% 1px no-repeat;
+}
+.mini-wf__bar,
+.mini-wf__level {
+  position: absolute;
+  top: 25%;
+  height: 50%;
+  background: currentColor;
+}
+.mini-wf__level {
+  width: 3px;
+  top: 5%;
+  height: 90%;
+  margin-left: -1px;
+}
+.mini-wf__value {
+  width: 18%;
+  text-align: right;
+  padding-left: var(--space-2);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.mini-wf tr.is-level .mini-wf__value {
+  font-weight: 700;
+}
+
+/* Neighbours */
+.neighbors {
+  margin: var(--space-3) 0 0;
+}
+.neighbors__box {
+  position: relative;
+  height: 240px;
+}
+.neighbors svg {
+  display: block;
+  overflow: hidden;
+}
+.neighbors__context {
+  fill: none;
+  stroke: var(--ink-muted);
+  stroke-opacity: 0.35;
+}
+.neighbors__shape {
+  fill: var(--train);
+  fill-opacity: 0.3;
+}
+.neighbors__line {
+  stroke: var(--location);
+  stroke-opacity: 0.7;
+  stroke-linecap: round;
+}
+.neighbors__dot {
+  fill: var(--train);
+}
+.neighbors__hit {
+  fill: transparent;
+}
+.neighbors g.is-active .neighbors__line {
+  stroke-opacity: 1;
+  stroke: var(--ink);
+}
+.neighbors g.is-active .neighbors__dot {
+  fill: var(--ink);
+  r: 5px;
+}
+.neighbors__featured {
+  fill: var(--prediction);
+  fill-opacity: 0.25;
+  stroke: var(--prediction);
+  stroke-width: 1.5;
+}
+.neighbors__center {
+  fill: var(--prediction);
+}
+.neighbors__tip {
+  position: absolute;
+  transform: translate(10px, -50%);
+  display: grid;
+  gap: 1px;
+  padding: var(--space-1) var(--space-2);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.neighbors__tip.is-left {
+  transform: translate(calc(-100% - 10px), -50%);
+}
+.neighbors__caption {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+/* Table */
+.predictions {
+  margin-top: var(--space-5);
+}
+.predictions__scroll {
+  overflow-x: auto;
+  max-height: 70svh;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.predictions__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--step--1);
+}
+.predictions__caption {
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+  margin-bottom: var(--space-2);
+}
+.predictions__table th,
+.predictions__table td {
+  padding: var(--space-1) var(--space-3);
+  border-top: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+.predictions__table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 1;
+}
+.predictions__table thead button {
+  border: 0;
+  padding: var(--space-1) 0;
+  font-weight: 600;
+}
+.table__arrow {
+  display: inline-block;
+  width: 1em;
+  font-size: 0.7em;
+  margin-left: 4px;
+}
+.predictions__table td.num {
+  font-variant-numeric: tabular-nums;
+}
+.predictions__table tbody tr {
+  cursor: pointer;
+}
+.predictions__table tbody tr:hover {
+  background: var(--surface);
+}
+.predictions__table tbody tr.is-selected {
+  background: rgb(255 255 0 / 0.08);
+}
+.predictions__pick {
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.predictions__download {
+  margin-top: var(--space-3);
+}
+
+@media (max-width: 767px) {
+  .explorer__top,
+  .whatif__grid,
+  .breakdown__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+  .explorer__select {
+    --graphic-h: 45svh;
+  }
+}

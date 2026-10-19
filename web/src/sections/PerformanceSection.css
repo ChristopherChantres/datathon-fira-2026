@@ -1,0 +1,208 @@
+.performance__intro {
+  color: var(--ink-muted);
+}
+.performance h3 {
+  margin-top: var(--space-5);
+}
+.performance h4 {
+  font-size: var(--step-0);
+  margin-bottom: var(--space-2);
+}
+.performance__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: var(--space-5);
+  align-items: start;
+}
+.performance__alternatives {
+  margin-top: var(--space-5);
+  color: var(--ink-muted);
+}
+
+/* Ladder */
+.ladder__metric {
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+.ladder__rungs {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-3);
+}
+.ladder__rung {
+  display: grid;
+  grid-template-columns: minmax(0, 13rem) minmax(0, 1fr) auto;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-2) 0;
+}
+.ladder__label {
+  font-size: var(--step--1);
+}
+.ladder__track {
+  height: 0.9rem;
+}
+.ladder__bar {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--ink-muted);
+}
+.ladder__rung--model .ladder__bar {
+  background: var(--prediction);
+}
+.ladder__rung--model .ladder__label,
+.ladder__rung--model .ladder__value {
+  color: var(--prediction);
+  font-weight: 700;
+}
+.ladder__value {
+  white-space: nowrap;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.ladder__extra {
+  padding-left: 1.1em;
+  font-size: var(--step--1);
+}
+
+/* Repeat strip */
+.strip__box {
+  height: 74px;
+}
+.strip svg {
+  overflow: visible;
+}
+.strip__dot {
+  fill: var(--prediction);
+  fill-opacity: 0.75;
+}
+.strip__mean {
+  stroke: var(--ink);
+  stroke-dasharray: 3 3;
+}
+.strip__mean-label,
+.strip__tick {
+  fill: var(--ink-muted);
+  font-size: 11px;
+}
+.strip__axis {
+  stroke: var(--ink-muted);
+}
+
+/* Scatter */
+.scatter {
+  margin: 0;
+}
+.scatter__box {
+  position: relative;
+  max-width: 520px;
+}
+.scatter svg {
+  display: block;
+  font-size: 11px;
+}
+.scatter__grid line {
+  stroke: var(--line);
+}
+.scatter__grid text,
+.scatter__axis-label {
+  fill: var(--ink-muted);
+}
+.scatter__diagonal {
+  stroke: var(--ink);
+  stroke-dasharray: 4 4;
+}
+.scatter__diagonal-label {
+  fill: var(--ink);
+}
+.scatter__dot {
+  fill: var(--train);
+  fill-opacity: 0.75;
+  stroke: var(--train);
+  stroke-width: 1.2;
+}
+.scatter__dot--rounded {
+  fill: none;
+}
+.scatter__dot.is-active {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.scatter__tip {
+  position: absolute;
+  transform: translate(-50%, calc(-100% - 10px));
+  padding: var(--space-1) var(--space-2);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.scatter__legend {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+  margin: var(--space-2) 0;
+}
+.scatter__key::before {
+  content: '';
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  margin-right: 0.4em;
+  border-radius: 50%;
+  border: 1.5px solid var(--train);
+}
+.scatter__key--measured::before {
+  background: var(--train);
+}
+.scatter figcaption {
+  font-size: var(--step--1);
+}
+
+/* Coverage */
+.coverage__grid {
+  display: grid;
+  gap: var(--space-3);
+}
+.coverage__card {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.coverage__card p {
+  font-size: var(--step--1);
+  margin: var(--space-2) 0 0;
+}
+.coverage__waffle {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 3px;
+  max-width: 20rem;
+}
+.coverage__waffle span {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--ink-muted);
+}
+.coverage__waffle span.is-hit {
+  background: var(--prediction);
+  border-color: var(--prediction);
+}
+
+@media (max-width: 767px) {
+  .performance__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+  .ladder__rung {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-1) var(--space-3);
+  }
+  .ladder__label {
+    grid-column: 1 / -1;
+  }
+}

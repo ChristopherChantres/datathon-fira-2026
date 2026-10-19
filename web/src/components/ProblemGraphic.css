@@ -1,0 +1,77 @@
+.problem-graphic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.problem-graphic .parcel-map {
+  margin: 0;
+  width: 100%;
+}
+
+/* Step 0: every parcel is just a parcel. Colors split by set from step 1 on. */
+.problem-graphic .parcel-map__marker,
+.problem-graphic .parcel-map__shape {
+  transition:
+    fill 0.6s var(--ease),
+    stroke 0.6s var(--ease);
+}
+.problem-graphic[data-step='0'] .parcel-map__marker {
+  fill: var(--ink);
+  fill-opacity: 0.85;
+}
+.problem-graphic[data-step='0'] .parcel-map__shape {
+  fill: var(--ink);
+  stroke: var(--ink);
+}
+
+.problem-graphic__q {
+  fill: var(--prediction);
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+  pointer-events: none;
+}
+.problem-graphic[data-step='1'] .problem-graphic__q,
+.problem-graphic[data-step='3'] .problem-graphic__q {
+  opacity: 1;
+}
+
+.problem-graphic__municipalities text {
+  fill: var(--ink-muted);
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.problem-graphic__row {
+  fill: var(--ink);
+  font-weight: 600;
+}
+.problem-graphic__mean {
+  stroke: var(--ink);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+.problem-graphic__mean-label {
+  fill: var(--ink);
+}
+.problem-graphic__axis {
+  stroke: var(--ink-muted);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.problem-graphic__tick {
+  fill: var(--ink-muted);
+}
+
+.problem-graphic__legend text {
+  fill: var(--ink);
+}
+.problem-graphic__key--train {
+  fill: var(--train);
+}
+text.problem-graphic__key--predict {
+  fill: var(--prediction);
+  font-weight: 700;
+}

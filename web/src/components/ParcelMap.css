@@ -104,3 +104,18 @@
 .parcel-map__key--predict::before {
   background: var(--prediction);
 }
+
+.parcel-map__parcel.is-hidden {
+  pointer-events: none;
+}
+
+.parcel-map__parcel[role='button'] {
+  cursor: pointer;
+}
+.parcel-map__parcel.is-selected .parcel-map__marker {
+  r: 7px;
+  fill-opacity: 1;
+  stroke: var(--ink);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}

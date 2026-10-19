@@ -1,0 +1,208 @@
+.model {
+  position: relative;
+  max-height: var(--graphic-h);
+  overflow: hidden;
+}
+.model svg {
+  display: block;
+  font-size: 12px;
+  overflow: hidden;
+}
+.model .tone-ink {
+  color: var(--ink);
+}
+
+/* Axes */
+.model__axis line {
+  stroke: var(--ink-muted);
+}
+.model__axis text {
+  fill: var(--ink-muted);
+}
+.model__axis-label {
+  fill: var(--ink-muted);
+}
+
+/* Means scene */
+.model__train {
+  fill: var(--train);
+  fill-opacity: 0.6;
+  transition:
+    fill 0.6s var(--ease),
+    fill-opacity 0.6s var(--ease);
+}
+.model:not([data-step='0']) .model__train {
+  fill-opacity: 0.25;
+}
+.model:not([data-step='0']) .model__train.is-local {
+  fill: var(--location);
+  fill-opacity: 0.85;
+}
+.model__level line {
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.model__level.is-dashed line {
+  stroke-dasharray: 5 4;
+}
+.model__level.is-bold line {
+  stroke-width: 3;
+}
+.model__level text {
+  fill: currentColor;
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3px;
+}
+.model__level.is-bold text {
+  font-weight: 700;
+}
+
+/* Neighbours scene */
+.model__context {
+  fill: none;
+  stroke: var(--ink-muted);
+  stroke-opacity: 0.4;
+}
+.model__neighbor-shape {
+  fill: var(--train);
+  fill-opacity: 0.35;
+  stroke: var(--train);
+  stroke-width: 0.8;
+}
+.model__neighbor-line {
+  stroke: var(--location);
+  stroke-linecap: round;
+  stroke-opacity: 0.85;
+}
+.model__featured-shape {
+  fill: var(--prediction);
+  fill-opacity: 0.2;
+  stroke: var(--prediction);
+  stroke-width: 2;
+}
+.model__featured-dot {
+  fill: var(--prediction);
+}
+.model__featured-tag {
+  fill: var(--prediction);
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3px;
+}
+.model__callout {
+  fill: var(--location);
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3px;
+}
+.model__neighbor-result {
+  fill: var(--location);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Waterfalls */
+.model__wf-label {
+  fill: var(--ink);
+}
+.model__wf-bar {
+  fill: currentColor;
+}
+.model__wf-level {
+  stroke: currentColor;
+  stroke-width: 2;
+}
+.model__wf-dot {
+  fill: currentColor;
+}
+.model__wf-connector {
+  stroke: var(--ink-muted);
+  stroke-dasharray: 2 3;
+}
+.model__wf-value {
+  fill: currentColor;
+  font-variant-numeric: tabular-nums;
+}
+.model__wf-row.is-level .model__wf-value {
+  font-weight: 700;
+}
+
+/* Ensemble scene */
+.model__ensemble text {
+  fill: currentColor;
+}
+.model__marker,
+.model__ghost {
+  fill: currentColor;
+}
+.model__band {
+  fill: var(--prediction);
+  fill-opacity: 0.22;
+}
+.model__band-label {
+  fill: var(--prediction) !important;
+}
+.model__yhat {
+  fill: var(--prediction);
+}
+.model__yhat-label {
+  fill: var(--prediction) !important;
+  font-weight: 700;
+}
+
+/* HTML overlays */
+.model__overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  pointer-events: none;
+}
+.model__overlay .katex-display {
+  margin: 0;
+}
+.model__overlay--prior .formula,
+.model__overlay--ensemble {
+  background: var(--bg);
+}
+.model__overlay--prior .formula {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius);
+}
+.model__overlay--prior {
+  top: 92px;
+  font-size: clamp(0.72rem, 2.6vw, 1rem);
+}
+.model__overlay--ensemble {
+  font-size: clamp(0.68rem, 2.4vw, 1rem);
+}
+.model__formula-caption {
+  margin: var(--space-2) auto 0;
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+.model__number {
+  top: 0;
+  display: grid;
+  gap: 2px;
+}
+.model__number-value {
+  color: var(--prediction);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.model__number-caption {
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+}
+
+@media (max-width: 767px) {
+  .model__overlay--prior {
+    top: 84px;
+  }
+}

@@ -1,17 +1,9 @@
 // Proves the browser model equals the Python model, using the original files in /data.
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import type { CurvesData, ModelData, ParcelCollection, PredictParcel } from '../data/types';
+import type { PredictParcel } from '../data/types';
 import { isPredict, isTrain } from '../data/types';
+import { curves, model, polygons } from '../test/fixtures';
 import { featureRange, predict, withArea, withFeature, type Contribution } from './predict';
-
-const readData = <T>(file: string): T =>
-  JSON.parse(readFileSync(fileURLToPath(new URL(`../../../data/${file}`, import.meta.url)), 'utf8')) as T;
-
-const model = readData<ModelData>('model.json');
-const curves = readData<CurvesData>('ndvi_curves.json');
-const polygons = readData<ParcelCollection>('parcels.geojson');
 
 const predictParcels = model.parcels.filter(isPredict);
 const trainParcels = model.parcels.filter(isTrain);

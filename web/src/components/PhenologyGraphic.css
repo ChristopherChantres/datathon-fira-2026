@@ -1,0 +1,85 @@
+.phenology {
+  position: relative;
+  max-height: var(--graphic-h);
+}
+.phenology svg {
+  display: block;
+  font-size: 12px;
+}
+
+.phenology__axes line {
+  stroke: var(--ink-muted);
+  stroke-width: 1;
+}
+.phenology__axes line.grid {
+  stroke: var(--line);
+}
+.phenology__axes text {
+  fill: var(--ink-muted);
+}
+.phenology__axes .axis-label {
+  fill: var(--ink);
+  font-weight: 600;
+}
+
+.phenology__raw circle {
+  fill: var(--phenology);
+  fill-opacity: 0.7;
+}
+.phenology__smooth {
+  fill: none;
+  stroke: var(--phenology);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.phenology__milestone line,
+.phenology__milestone .bracket {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+.phenology__milestone line.dashed {
+  stroke-dasharray: 4 4;
+}
+.phenology__milestone circle {
+  fill: var(--phenology);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.phenology__milestone text {
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.phenology__green rect {
+  fill: var(--phenology);
+  fill-opacity: 0.28;
+}
+.phenology__green text {
+  fill: var(--phenology);
+  font-weight: 600;
+}
+
+.phenology__all path {
+  fill: none;
+  stroke: var(--phenology);
+  stroke-opacity: 0.12;
+  stroke-width: 1;
+}
+.phenology__median line {
+  stroke: var(--ink-muted);
+  stroke-dasharray: 1 4;
+  stroke-width: 1.5;
+}
+.phenology__median text {
+  fill: var(--ink-muted);
+  font-size: 11px;
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3px;
+}
