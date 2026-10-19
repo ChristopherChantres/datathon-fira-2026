@@ -1,0 +1,11 @@
+# Files not uploaded by `gcloud run deploy --source .`
+.gcloudignore
+.git
+.gitignore
+.cursor
+.DS_Store
+**/.DS_Store
+model/
+web/node_modules/
+web/dist/
+web/public/data/

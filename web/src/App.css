@@ -1,0 +1,54 @@
+.section {
+  padding: var(--space-6) var(--gutter);
+  border-bottom: 1px solid var(--line);
+}
+.section__inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+.section--hero {
+  min-height: calc(100svh - var(--nav-height));
+  display: grid;
+  align-items: center;
+}
+.section--hero h1 {
+  max-width: 18ch;
+}
+.section__lead {
+  font-size: var(--step-1);
+  color: var(--ink-muted);
+}
+
+.ensemble {
+  margin-top: var(--space-4);
+  overflow-x: auto;
+}
+.ensemble__caption {
+  font-size: var(--step--1);
+}
+.formula--block .katex-display {
+  margin: var(--space-3) 0;
+}
+.formula .katex {
+  font-size: 1.15em;
+}
+.formula--block .katex {
+  /* Shrink on phones so the ensemble formula fits a 360px screen without scrolling. */
+  font-size: clamp(0.8em, 3.4vw, 1.15em);
+}
+
+.tex-prediction {
+  color: var(--prediction);
+}
+.tex-phenology {
+  color: var(--phenology);
+}
+.tex-location {
+  color: var(--location);
+}
+
+.footer {
+  padding: var(--space-5) var(--gutter);
+  text-align: center;
+  font-size: var(--step--1);
+}

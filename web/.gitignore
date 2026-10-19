@@ -1,0 +1,4 @@
+node_modules/
+dist/
+# Copied from ../data by scripts/sync-data.mjs; the originals are the source of truth.
+public/data/

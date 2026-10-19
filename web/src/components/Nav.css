@@ -1,0 +1,54 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: var(--nav-height);
+  padding: 0 var(--gutter);
+  background: rgb(0 0 0 / 0.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--step--1);
+}
+.nav__brand {
+  flex: none;
+  font-weight: 650;
+  text-decoration: none;
+}
+.nav nav {
+  min-width: 0;
+  flex: 1;
+}
+.nav__links {
+  display: flex;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Fade the overflow on narrow screens so it reads as scrollable. */
+  mask-image: linear-gradient(to right, #000 85%, transparent);
+}
+.nav__links::-webkit-scrollbar {
+  display: none;
+}
+.nav__links a {
+  display: block;
+  padding: var(--space-2) 0;
+  white-space: nowrap;
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+.nav__links a:hover,
+.nav__links a:focus-visible {
+  color: var(--ink);
+}
+@media (min-width: 60rem) {
+  .nav__links {
+    justify-content: flex-end;
+    mask-image: none;
+  }
+}

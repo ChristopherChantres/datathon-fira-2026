@@ -1,0 +1,11 @@
+# Only data/ and web/ (minus local artifacts) are needed to build the image.
+.git
+.cursor
+.DS_Store
+**/.DS_Store
+model
+docs
+*.md
+web/node_modules
+web/dist
+web/public/data

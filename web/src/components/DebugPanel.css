@@ -1,0 +1,63 @@
+.debug {
+  position: fixed;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  z-index: 50;
+  font: 12px/1.4 var(--font-mono);
+}
+.debug__toggle {
+  display: block;
+  margin-left: auto;
+  background: var(--bg);
+  border-color: var(--error);
+  color: var(--error);
+}
+.debug__body {
+  margin-top: var(--space-2);
+  width: min(42rem, calc(100vw - 2 * var(--space-3)));
+  max-height: 70vh;
+  overflow: auto;
+  padding: var(--space-3);
+  background: #0b0b0b;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.debug__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+.debug select,
+.debug input {
+  font: inherit;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 2px 4px;
+}
+.debug p {
+  max-width: none;
+  color: var(--ink-muted);
+}
+.debug table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-3);
+}
+.debug caption {
+  text-align: left;
+  color: var(--ink-muted);
+  padding-bottom: 4px;
+}
+.debug th,
+.debug td {
+  text-align: right;
+  padding: 2px 6px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.debug th:first-child,
+.debug td:first-child {
+  text-align: left;
+}
