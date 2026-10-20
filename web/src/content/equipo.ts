@@ -1,5 +1,6 @@
 // "Equipo" copy (visitor-facing, es-MX). Names and links live in site.ts.
 import { site } from './site';
+import { videoId } from './video';
 
 export function equipoCopy() {
   return {
@@ -17,7 +18,7 @@ export function equipoCopy() {
       '**INEGI**: elevación y pendiente.',
     ],
     repoLink: site.repoUrl ? { text: 'Código y datos en GitHub', href: site.repoUrl } : null,
-    videoLink: site.videoUrl ? { text: 'Ver el video', href: site.videoUrl } : null,
+    videoLink: videoId ? { text: 'Ver el video', href: site.videoUrl } : null,
     aiTitle: 'Transparencia sobre el uso de IA',
     ai: [
       'El modelado y este sitio se desarrollaron con ayuda de IA generativa (Claude, de Anthropic, en chat y en Claude Code), bajo la dirección y revisión del equipo.',

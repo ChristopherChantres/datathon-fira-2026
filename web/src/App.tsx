@@ -17,6 +17,8 @@ import { equipoCopy } from './content/equipo';
 import { site } from './content/site';
 import { downloadPredictionsCsv } from './lib/download';
 import { ProblemaSection } from './sections/ProblemaSection';
+import { VideoSection } from './sections/VideoSection';
+import { videoId } from './content/video';
 import './App.css';
 
 // Statically false in production builds, so the panel is tree-shaken away.
@@ -65,6 +67,7 @@ function Page({ model, collection }: { model: ModelData; collection: ParcelColle
       <Nav sections={sections} />
       <main id="contenido">
         <Hero story={story} collection={collection} />
+        {videoId && <VideoSection section={section('video')} videoId={videoId} />}
         {story_.problema}
         {story_.fenologia}
         {story_.modelo}

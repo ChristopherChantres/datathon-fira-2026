@@ -18,6 +18,8 @@ export const site = {
   ] satisfies Member[],
   university: 'Universidad de las Américas Puebla',
   repoUrl: 'https://github.com/ChristopherChantres/datathon-fira-2026',
-  // The video is not published yet; empty hides the link.
-  videoUrl: '',
+  // Any common YouTube URL form; empty or unparseable hides everything video-related.
+  videoUrl: 'https://www.youtube.com/watch?v=khRHMa40_u8',
+  /** Length shown on the hero button and the video section title. */
+  videoMinutes: 5,
 } as const;

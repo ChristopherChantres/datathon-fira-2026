@@ -1,0 +1,72 @@
+.video__frame {
+  position: relative;
+  max-width: 56rem;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg);
+}
+.video__frame iframe,
+.video__facade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video__facade {
+  padding: 0;
+  border-radius: 0;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+}
+/* hqdefault is 4:3 with letterbox bars; cover crops them to the 16:9 frame. */
+.video__facade img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: opacity var(--duration-fast) var(--ease);
+}
+.video__play {
+  position: relative;
+  display: block;
+  width: clamp(56px, 14vw, 84px);
+  transition: transform var(--duration-fast) var(--ease);
+}
+.video__play svg {
+  width: 100%;
+  height: auto;
+}
+.video__play rect {
+  fill: var(--prediction);
+}
+.video__play path {
+  fill: var(--bg);
+}
+.video__facade:hover img,
+.video__facade:focus-visible img {
+  opacity: 1;
+}
+.video__facade:hover .video__play,
+.video__facade:focus-visible .video__play {
+  transform: scale(1.08);
+}
+/* The frame clips outlines, so the focus ring is drawn inside the button. */
+.video__facade:focus-visible {
+  outline: 3px solid var(--prediction);
+  outline-offset: -3px;
+}
+.video__link {
+  margin-top: var(--space-2);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+.video__link a:hover {
+  color: var(--ink);
+}
+

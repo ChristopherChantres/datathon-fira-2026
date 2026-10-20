@@ -3,6 +3,7 @@
 import { geoMercator, geoPath } from 'd3-geo';
 import { useMemo, useRef } from 'react';
 import { heroCopy } from '../content/hero';
+import { videoCopy, videoId } from '../content/video';
 import type { Story } from '../data/story';
 import type { ParcelCollection } from '../data/types';
 import { circlePath, fitProjection, projectParcels } from '../lib/geo';
@@ -162,12 +163,21 @@ export function Hero({ story, collection }: { story: Story; collection: ParcelCo
         <p className="hero__subtitle">
           <RichText text={copy.subtitle} />
         </p>
-        <a className="hero__cue" href="#problema">
-          {copy.cue}
-          <span aria-hidden="true" className="hero__chevron">
-            ↓
-          </span>
-        </a>
+        <div className="hero__actions">
+          {/* Not part of the intro timeline. html's scroll-behavior makes the jump smooth,
+              or instant with reduced motion. */}
+          {videoId && (
+            <a className="hero__video" href="#video">
+              {videoCopy().heroButton}
+            </a>
+          )}
+          <a className="hero__cue" href="#problema">
+            {copy.cue}
+            <span aria-hidden="true" className="hero__chevron">
+              ↓
+            </span>
+          </a>
+        </div>
       </div>
       <div className="hero__graphic" ref={graphicRef} aria-hidden="true">
         {geometry && (

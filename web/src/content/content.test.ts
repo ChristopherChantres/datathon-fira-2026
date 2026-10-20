@@ -8,8 +8,12 @@ import { model } from '../test/fixtures';
 import { facts } from './facts';
 import { seasonYearFromMeta } from './impacto';
 import { site } from './site';
+import { videoId } from './video';
+import { sectionCopy } from './sections';
 
 const dir = fileURLToPath(new URL('.', import.meta.url));
+// Widened: the configured value is a literal type, but either form must stay valid.
+const videoUrl: string = site.videoUrl;
 const read = (file: string) => readFileSync(join(dir, file), 'utf8');
 
 /** The text of every string and template literal (outside ${…}), skipping comments. */
@@ -98,7 +102,14 @@ describe('site.ts', () => {
     expect(site.members.length).toBeGreaterThan(0);
     for (const m of site.members) expect(m.name.trim()).not.toBe('');
     expect(site.repoUrl).toMatch(/^https:\/\/github\.com\//);
-    expect(site.videoUrl === '' || /^https:\/\//.test(site.videoUrl)).toBe(true);
+    expect(videoUrl === '' || /^https:\/\//.test(videoUrl)).toBe(true);
+  });
+
+  it('has a video URL the facade can play, or none at all', () => {
+    expect(videoUrl === '' || videoId !== null).toBe(true);
+    const ids = sectionCopy(model).map((s) => s.id);
+    expect(ids.includes('video')).toBe(videoId !== null);
+    if (videoId) expect(ids.slice(0, 3)).toEqual(['hero', 'video', 'problema']);
   });
 });
 

@@ -2,9 +2,12 @@
 // the data, never literals.
 import type { ModelData } from '../data/types';
 import { isPredict } from '../data/types';
+import { site } from './site';
+import { videoId } from './video';
 
 export type SectionId =
   | 'hero'
+  | 'video'
   | 'problema'
   | 'fenologia'
   | 'modelo'
@@ -23,11 +26,16 @@ export interface SectionCopy {
 export function sectionCopy(model: ModelData): SectionCopy[] {
   const nPredict = model.parcels.filter(isPredict).length;
 
-  return [
+  const sections: SectionCopy[] = [
     {
       id: 'hero',
       nav: 'Inicio',
       title: '¿Cuánta cebada dará esta parcela?',
+    },
+    {
+      id: 'video',
+      nav: 'Video',
+      title: `El proyecto en ${site.videoMinutes} minutos`,
     },
     {
       id: 'problema',
@@ -70,4 +78,6 @@ export function sectionCopy(model: ModelData): SectionCopy[] {
       title: 'Equipo',
     },
   ];
+  // Without a usable video there is no video section (nor its nav link).
+  return videoId ? sections : sections.filter((s) => s.id !== 'video');
 }

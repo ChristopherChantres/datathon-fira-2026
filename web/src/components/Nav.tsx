@@ -28,7 +28,9 @@ export function Nav({ sections }: { sections: SectionCopy[] }) {
     const list = listRef.current;
     const link = list?.querySelector<HTMLElement>('a[aria-current]');
     if (!list || !link || list.scrollWidth <= list.clientWidth) return;
-    list.scrollTo({ left: link.offsetLeft - list.clientWidth / 2 + link.offsetWidth / 2, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+    // Measured against the list itself (the link's offsetParent is the sticky header).
+    const offset = link.getBoundingClientRect().left - list.getBoundingClientRect().left + list.scrollLeft;
+    list.scrollTo({ left: offset - list.clientWidth / 2 + link.offsetWidth / 2, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
   }, [active]);
 
   return (
